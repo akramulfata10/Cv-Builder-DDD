@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -37,4 +39,11 @@ class User extends Authenticatable {
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile(): HasOne {
+        return $this->belongsTo(
+            related:Profile::class,
+            foreignKey:'user_id',
+        );
+    }
 }
