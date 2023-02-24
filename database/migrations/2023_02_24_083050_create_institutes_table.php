@@ -11,11 +11,12 @@ return new class extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('yatims', function (Blueprint $table) {
+        Schema::create('institutes', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('name');
-            $table->foreignId('user_id')->index()->constrained()->cascadeOnDelete();
+            $table->string('website')->nullable();
+            $table->boolean('verified')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('yatims');
+        Schema::dropIfExists('institutes');
     }
 };
