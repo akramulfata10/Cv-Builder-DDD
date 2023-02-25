@@ -1,23 +1,24 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile>
  */
-class ProfileFactory extends Factory
-{
+class ProfileFactory extends Factory {
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         return [
-            //
+            'bio' => $this->faker->paragraphs(4, true),
+            'user_id' => User::factory(),
+            'uuid' => $this->faker->uuid(),
         ];
     }
 }

@@ -40,10 +40,7 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-    public function profile(): HasOne {
-        return $this->belongsTo(
-            related:Profile::class,
-            foreignKey:'user_id',
-        );
+    public function profile() {
+        return $this->HasOne(Profile::class, 'user_id');
     }
 }
