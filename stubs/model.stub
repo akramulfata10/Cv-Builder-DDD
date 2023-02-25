@@ -8,4 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class {{ class }} extends Model
 {
     use HasFactory;
+
+    
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class {{ class }} extends Model
+{
+    use HasFactory;
+
+    /**
+     * @var array<int,string>
+     */
+    protected $fillable = [];
+
+    /**
+     * @var array<string,string>
+     */
+    protected $casts = [];
+
+    // Relationships
+
+    // Helper Methods
 }
