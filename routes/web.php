@@ -21,12 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
-
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::prefix('profilesbio')->as('profilesbio:')->group(function () {
