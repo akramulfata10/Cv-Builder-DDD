@@ -99,7 +99,6 @@
                                 </form>
 
                             </div>
-
                         </div>
                     </div>
 
@@ -153,7 +152,7 @@
                     <div class="grid grid-cols-3 gap-8 items-center">
                         <div class="col-span-2">
                             <nav class="flex space-x-4">
-                                <x-profile-link href="">
+                                <x-profile-link href="{{ route('profilesbio:show') }}">
                                     Profile Bio
                                 </x-profile-link>
 
@@ -168,7 +167,6 @@
                                 <x-profile-link href="">
                                     Share
                                 </x-profile-link>
-
                             </nav>
                         </div>
                         <div>
@@ -323,7 +321,7 @@
         </footer>
     </div>
 
-    {{-- <livewire:livewire-ui-spotlight /> --}}
+    <livewire:livewire-ui-spotlight />
     {{-- <livewire:livewire-ui-modal /> --}}
 </body>
 
