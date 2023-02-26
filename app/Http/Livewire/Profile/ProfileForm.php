@@ -26,7 +26,6 @@ class ProfileForm extends Component implements HasForms {
                 <form wire:submit.prevent="submit" class="mt-3">
                     {{ $this->form }}
 
-                    coba implements form fillament
 
                     <button
                         type="submit"
