@@ -4,6 +4,7 @@ declare (strict_types = 1);
 
 namespace App\Http\Livewire\Profile;
 
+use App\Models\Profile;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -27,6 +28,12 @@ class ProfileForm extends Component implements HasForms {
         return [
             MarkdownEditor::make('bio')->required(),
         ];
+    }
+
+    public function mount(Profile $profile) {
+        $this->profile = $profile;
+        $this->bio = $profile->bio;
+        $this->uuid = $profile->uuid;
     }
 
     public function rules(): array{
