@@ -17,7 +17,9 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' = $this->faker->company(),
+            'website' => $this->faker->url(),
+            'verified' => $this->faker->boolean(),
         ];
     }
 }
