@@ -1,63 +1,62 @@
 <?php
 
-declare (strict_types = 1);
-
 namespace App\Http\Livewire\Profile;
 
 use App\Models\Profile;
+use App\Models\User;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 
 class ProfileForm extends Component implements HasForms {
 
     use InteractsWithForms;
-    // add to model
-    public Model $profile;
-    // add variabel field data in databases
+
     public string $uuid;
-    // add variabel field data in databases
-    public null | string $bio = null;
-    // add variabel field data in databases
-    // kalau null boleh string pun boleh
+
+    public string | null $bio = null;
 
     protected function getFormSchema(): array
     {
         return [
-            MarkdownEditor::make('bio')->required(),
+            MarkdownEditor::make('bio'),
         ];
     }
 
-    public function mount(Profile $profile) {
-        $this->profile = $profile;
-        $this->bio = $profile->bio;
-        $this->uuid = $profile->uuid;
+    public function mount(User $user): void {
+        $this->uuid = $user->profile->uuid;
+        $this->bio = $user->profile->bio;
     }
 
-    public function rules(): array{
+    public function submit(): void {
+        $this->validate();
+        Profile::query()->where('uuid', $this->uuid)->update(['bio' => $this->bio]);
+    }
+
+    protected function rules(): array{
         return [
             'bio' => [
                 'nullable',
-                'string',
+                'required',
             ],
         ];
     }
 
-    public function render(): string {
+    public function render() {
         return <<<'blade'
-            <div>
-                <form wire:submit.prevent="submit" class="mt-3">
-                    {{ $this->form }}
+            <form class="space-y-8 divide-y divide-y-blue-gray-200" wire:submit.prevent="submit">
+                {{ $this->form }}
+                <div class="mt-4 text-start">
                     <button
                         type="submit"
-                        class="mt-2 bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                        class="bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
                     >
                         Save
                     </button>
-                </form>
-            </div>
+                </div>
+            </form>
         blade;
+        // return view('livewire.profile.profile-form');
     }
 }

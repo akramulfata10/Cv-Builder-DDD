@@ -15,9 +15,9 @@
             display: none !important;
         }
     </style>
+    <livewire:styles />
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-    @livewireScripts
     @stack('scripts')
 </head>
 
@@ -320,9 +320,8 @@
             </div>
         </footer>
     </div>
-
     <livewire:livewire-ui-spotlight />
-    {{-- <livewire:livewire-ui-modal /> --}}
+    <livewire:scripts />
 </body>
 
 </html>
