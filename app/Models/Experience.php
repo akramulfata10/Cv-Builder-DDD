@@ -25,17 +25,17 @@ class Experience extends Model {
         'current' => 'boolean',
         'started_at' => 'date',
         'finished_at' => 'date',
-    ]
+    ];
 
-    public function owner() {
+    public function profile() {
         return $this->belongsTo(Profile::class, 'profile_id');
     }
 
-    public function jobTitle(){
-        return $this->belongsTo(JobTitle::class,'job_title_id');
+    public function jobTitle() {
+        return $this->belongsTo(JobTitle::class, 'job_title_id');
     }
 
-    public function company(){
+    public function company() {
         return $this->belongsTo(Company::class, 'company_id');
     }
 

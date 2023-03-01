@@ -11,7 +11,7 @@ class JobTitle extends Model {
     /**
      * @var bool
      */
-    public $timetamps = false;
+    public $timestamps = false;
 
     /**
      * @var array<int,string>
