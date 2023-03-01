@@ -16,6 +16,11 @@ return new class extends Migration {
             $table->uuid('uuid')->unique();
             $table->text('description');
             $table->boolean('current')->default(false);
+
+            $table->foreignId('profile_id')->index()->constrained()->cascadeOnDelete();
+            $table->foreignId('job_title_id')->index()->constrained()->cascadeOnDelete();
+            $table->foreignId('company_id')->index()->constrained()->cascadeOnDelete();
+
             $table->date('started_at');
             $table->date('finished_at')->nullable();
             $table->timestamps();

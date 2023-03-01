@@ -15,4 +15,8 @@ class Company extends Model {
 
     protected $casts = ['verified' => 'boolean'];
 
+    public function experiences() {
+        return $this->hasMany(Experience::class, 'company_id');
+    }
+
 }

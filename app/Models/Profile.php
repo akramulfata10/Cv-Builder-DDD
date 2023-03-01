@@ -18,4 +18,8 @@ class Profile extends Model {
         return $this->BelongsTo(User::class, 'user_id');
     }
 
+    public function experiences() {
+        return $this->hasMany(Experience::class, 'profile_id');
+    }
+
 }

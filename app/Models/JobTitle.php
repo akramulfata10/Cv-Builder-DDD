@@ -18,7 +18,9 @@ class JobTitle extends Model {
      */
     protected $fillable = ['name'];
 
-    // Relationships
+    public function experiences() {
+        return $this->hasMany(Experience::class, 'job_title_id');
+    }
 
     // Helper Methods
 }
