@@ -31,7 +31,7 @@ class ProfileForm extends Component implements HasForms {
 
     public function submit(): void {
         $this->validate();
-        Profile::query()->where('uuid', $this->uuid)->update(['bio' => $this->bio]);
+        auth()->user()->profile()->update(['bio' => $this->bio]);
     }
 
     protected function rules(): array{

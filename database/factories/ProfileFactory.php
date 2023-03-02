@@ -16,7 +16,7 @@ class ProfileFactory extends Factory {
      */
     public function definition() {
         return [
-            'bio' => $this->faker->paragraphs(4, true),
+            'bio' => $this->faker->sentences(4, true),
             'user_id' => User::factory(),
             // 'uuid' => $this->faker->uuid(),
         ];
