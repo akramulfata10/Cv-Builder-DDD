@@ -197,6 +197,11 @@ return [
 
         App\Providers\ObservableServiceProvider::class, //this add
 
+        /*
+         * Domain Service Providers...
+         */
+        Domains\Profile\Providers\ProfileServiceProvider::class,
+
     ],
 
     /*
