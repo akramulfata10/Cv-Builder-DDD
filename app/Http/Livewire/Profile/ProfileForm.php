@@ -3,19 +3,23 @@
 namespace App\Http\Livewire\Profile;
 
 use App\Models\Profile;
-use App\Models\User;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Database\Eloquent\Model;
+use Infrastructure\Profile\Actions\UpdateProfileBioContract;
 use Livewire\Component;
 
-class ProfileForm extends Component implements HasForms {
+class ProfileForm extends Component implements HasForms
+{
 
     use InteractsWithForms;
 
+    public Model $profile;
+
     public string $uuid;
 
-    public string | null $bio = null;
+    public string|null $bio = null;
 
     protected function getFormSchema(): array
     {
@@ -24,26 +28,36 @@ class ProfileForm extends Component implements HasForms {
         ];
     }
 
-    public function mount(User $user): void {
-        $this->uuid = $user->profile->uuid;
-        $this->bio = $user->profile->bio;
+    public function mount(Profile $profile): void
+    {
+        $this->profile = $profile;
+        $this->uuid = $profile->uuid;
+        $this->bio = $profile->bio;
     }
 
-    public function submit(): void {
+    public function submit(UpdateProfileBioContract $action): void
+    {
         $this->validate();
-        auth()->user()->profile()->update(['bio' => $this->bio]);
+
+        $action->handle(
+            profile:$this->profile,
+            bio:$this->bio,
+        );
+        // auth()->user()->profile()->update(['bio' => $this->bio]);
     }
 
-    protected function rules(): array{
+    protected function rules(): array
+    {
         return [
             'bio' => [
-                'nullable',
                 'required',
+                'nullable',
             ],
         ];
     }
 
-    public function render() {
+    public function render()
+    {
         return <<<'blade'
             <form class="space-y-8 divide-y divide-y-blue-gray-200" wire:submit.prevent="submit">
                 {{ $this->form }}

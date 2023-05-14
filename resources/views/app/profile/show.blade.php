@@ -10,7 +10,8 @@
                         Get started by adding a bio about yourself.
                     </p>
                 </div>
-                <livewire:profile.profile-form :user="$user">
+                {{-- <livewire:profile.profile-form :profile="$profile" /> --}}
+                <livewire:profile.profile-form :profile="$profile">
             </div>
         </div>
     </section>
